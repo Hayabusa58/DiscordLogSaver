@@ -96,7 +96,7 @@ public class GUIHandler extends JFrame implements ActionListener{
 		
 		if (o == runbutton) {
 			
-			setToken("Mjc5OTU2MDQ2NDgxNzE5Mjk2.C6Fnig.2tfZ9znD6tJgMfc3aQPfbY6Gr7U");
+			setToken("");
 			System.out.println(getToken());
 			IDiscordClient client = Main.createClient(getToken(), true);
 			EventDispatcher dispatcher = client.getDispatcher();
