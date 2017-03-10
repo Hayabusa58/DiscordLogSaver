@@ -13,9 +13,12 @@ import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
 
 public class Main {
-
+	
+	public static GUIHandler guiHandler;
 	public static void main(String[] args) {
-		GUIHandler guiHandler = new GUIHandler();
+		guiHandler = new GUIHandler("DiscordLogSaver");
+		guiHandler.createFrame(guiHandler);
+		guiHandler.setVisible(true);
 		System.out.println("runed");
 
 	}
@@ -38,18 +41,19 @@ public class Main {
 		}
 	}
 
-	public static void exportFile(List formatedmessages) {
+	public static void exportFile(List formatedmessages, String exportdir) {
+		System.out.println(exportdir);
 		List<String> lines = new ArrayList<>();
 		String br = System.getProperty("line.separator");
 		try{
-			File exportfile = new File("C:/Users/Hayabusa/Desktop/ex.txt");
+			File exportfile = new File(exportdir + "\\ex.txt");
+			exportfile.createNewFile();
 			if(exportfile.exists() && exportfile.canWrite()){
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(exportfile)));
 				for(int i = 0; i < formatedmessages.size(); i++){
 					lines.add(formatedmessages.get(i).toString());
 					pw.println(br + lines.get(i) + br);
 				}
-
 				pw.close();
 			}
 		}catch(IOException e){
