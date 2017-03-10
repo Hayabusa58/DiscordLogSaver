@@ -17,6 +17,8 @@ import sx.blah.discord.util.DiscordException;
 public class Main {
 
 	public static GUIHandler guiHandler;
+	
+	public static boolean iscompleted;
 	public static void main(String[] args) {
 		guiHandler = new GUIHandler("DiscordLogSaver");
 		guiHandler.createFrame(guiHandler);
@@ -61,9 +63,11 @@ public class Main {
 					pw.println(br + lines.get(i) + br);
 				}
 				pw.close();
+				iscompleted = true;
 			}
 		}catch(IOException e){
 			e.printStackTrace();
+			iscompleted = false;
 		}
 	}
 
