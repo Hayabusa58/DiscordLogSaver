@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +15,7 @@ import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.util.DiscordException;
 
 public class Main {
-	
+
 	public static GUIHandler guiHandler;
 	public static void main(String[] args) {
 		guiHandler = new GUIHandler("DiscordLogSaver");
@@ -41,12 +43,16 @@ public class Main {
 		}
 	}
 
-	public static void exportFile(List formatedmessages, String exportdir) {
+	public static void exportFile(List formatedmessages, String exportdir, String channelname) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String date = LocalDateTime.now().format(formatter);
+		String filaname = exportdir + "\\" + channelname + "_" + date + ".txt";
+		System.out.println(filaname);
 		System.out.println(exportdir);
 		List<String> lines = new ArrayList<>();
 		String br = System.getProperty("line.separator");
 		try{
-			File exportfile = new File(exportdir + "\\ex.txt");
+			File exportfile = new File(filaname);
 			exportfile.createNewFile();
 			if(exportfile.exists() && exportfile.canWrite()){
 				PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(exportfile)));
